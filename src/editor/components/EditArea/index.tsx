@@ -46,10 +46,12 @@ export function EditArea() {
   };
 
   return (
-    <div className="h-[100%] edit-area" onMouseOver={handleMouseOver}>
-      {/* <pre>{JSON.stringify(components, null, 2)}</pre> */}
+    <>
+      <div className="h-[100%] edit-area" onMouseOver={handleMouseOver}>
+        {/* <pre>{JSON.stringify(components, null, 2)}</pre> */}
 
-      {renderComponents(components)}
-    </div>
+        {renderComponents(components)}
+      </div>
+    </>
   );
 }
