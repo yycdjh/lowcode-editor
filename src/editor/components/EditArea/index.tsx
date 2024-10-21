@@ -1,6 +1,7 @@
 import React, { MouseEventHandler, useEffect, useState } from "react";
 import { useComponentConfigStore } from "../../stores/component-config";
 import { Component, useComponentsStore } from "../../stores/components";
+import HoverMask from "../HoverMask";
 
 export function EditArea() {
   const { components } = useComponentsStore();
@@ -51,6 +52,12 @@ export function EditArea() {
         {/* <pre>{JSON.stringify(components, null, 2)}</pre> */}
 
         {renderComponents(components)}
+        {hoverComponentId && (
+          <HoverMask
+            componentId={hoverComponentId}
+            containerClassName="edit-area"
+          />
+        )}
       </div>
     </>
   );
