@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useEffect, useState } from "react";
+import React, { MouseEventHandler, useState } from "react";
 import { useComponentConfigStore } from "../../stores/component-config";
 import { Component, useComponentsStore } from "../../stores/components";
 import HoverMask from "../HoverMask";
@@ -38,7 +38,7 @@ export function EditArea() {
     for (let i = 0; i < path.length; i += 1) {
       const ele = path[i] as HTMLElement;
 
-      const componentId = ele.dataset.componentId;
+      const componentId = ele.dataset?.componentId;
       if (componentId) {
         setHoverComponentId(+componentId);
         return;

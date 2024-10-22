@@ -30,7 +30,7 @@ export const useComponentsStore = create<State & Action>((set, get) => ({
   addComponent: (component, parentId) => {
     set((state) => {
       if (parentId) {
-        const parentComponent = getCompentById(parentId, state.components);
+        const parentComponent = getComponentById(parentId, state.components);
 
         if (parentComponent) {
           if (parentComponent.children) {
@@ -48,9 +48,9 @@ export const useComponentsStore = create<State & Action>((set, get) => ({
   },
   deleteComponent: (componentId) => {
     if (!componentId) return;
-    const component = getCompentById(componentId, get().components);
+    const component = getComponentById(componentId, get().components);
     if (component?.parentId) {
-      const parentComponent = getCompentById(
+      const parentComponent = getComponentById(
         component.parentId,
         get().components
       );
@@ -66,7 +66,7 @@ export const useComponentsStore = create<State & Action>((set, get) => ({
   },
   updateComponentProps: (componentId, props) => {
     set((state) => {
-      const component = getCompentById(componentId, state.components);
+      const component = getComponentById(componentId, state.components);
 
       if (component) {
         component.props = { ...component.props, ...props };
@@ -79,7 +79,7 @@ export const useComponentsStore = create<State & Action>((set, get) => ({
   },
 }));
 
-export function getCompentById(
+export function getComponentById(
   id: number | null,
   components: Component[]
 ): Component | null {
@@ -88,7 +88,7 @@ export function getCompentById(
   for (const component of components) {
     if (component.id == id) return component;
     if (component.children && component.children.length > 0) {
-      const result = getCompentById(id, component.children);
+      const result = getComponentById(id, component.children);
       if (result) return result;
     }
   }

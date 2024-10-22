@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
-import { getCompentById, useComponentsStore } from "../../stores/components";
+import { getComponentById, useComponentsStore } from "../../stores/components";
 
 interface HoverMaskProps {
   portalWrapperClassName: string;
@@ -24,6 +24,13 @@ function HoverMask({
 
   const { components } = useComponentsStore();
 
+  useEffect(() => {
+    updatePosition();
+  }, [componentId]);
+
+  useEffect(() => {
+    updatePosition();
+  }, [components]);
   function updatePosition() {
     if (!componentId) return;
 
@@ -38,25 +45,21 @@ function HoverMask({
       container.getBoundingClientRect();
 
     let labelTop = top - containerTop + container.scrollTop;
-    let labelLeft = left - containerLeft + width;
+    const labelLeft = left - containerLeft + width;
 
     if (labelTop <= 0) {
       labelTop -= -20;
     }
 
     setPosition({
-      left: left - containerLeft + container.scrollLeft,
       top: top - containerTop + container.scrollTop,
+      left: left - containerLeft + container.scrollLeft,
       width,
       height,
       labelTop,
       labelLeft,
     });
   }
-
-  useEffect(() => {
-    updatePosition();
-  }, [componentId]);
 
   // const el = useMemo(() => {
   //   const el = document.createElement("div");
@@ -68,29 +71,30 @@ function HoverMask({
   //   return el;
   // }, []);
   const el = useMemo(() => {
-    return document.querySelector(`.${portalWrapperClassName}`);
+    return document.querySelector(`.${portalWrapperClassName}`)!;
   }, []);
 
   const curComponent = useMemo(() => {
-    return getCompentById(componentId, components);
+    return getComponentById(componentId, components);
   }, [componentId]);
 
   return createPortal(
-    <div
-      style={{
-        position: "absolute",
-        left: position.left,
-        top: position.top,
-        width: position.width,
-        height: position.height,
-        backgroundColor: "rgba(0, 0, 255, 0.1)",
-        border: "1px solid red",
-        pointerEvents: "none",
-        zIndex: 12,
-        borderRadius: 4,
-        boxSizing: "border-box",
-      }}
-    >
+    <>
+      <div
+        style={{
+          position: "absolute",
+          left: position.left,
+          top: position.top,
+          width: position.width,
+          height: position.height,
+          backgroundColor: "rgba(0, 0, 255, 0.1)",
+          border: "1px dashed blue",
+          pointerEvents: "none",
+          zIndex: 12,
+          borderRadius: 4,
+          boxSizing: "border-box",
+        }}
+      ></div>
       <div
         style={{
           position: "absolute",
@@ -115,7 +119,7 @@ function HoverMask({
           {curComponent?.name}
         </div>
       </div>
-    </div>,
+    </>,
     el
   );
 }
