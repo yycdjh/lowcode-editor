@@ -48,7 +48,11 @@ export function EditArea() {
 
   return (
     <>
-      <div className="h-[100%] edit-area" onMouseOver={handleMouseOver}>
+      <div
+        className="h-[100%] edit-area"
+        onMouseOver={handleMouseOver}
+        onMouseLeave={() => setHoverComponentId(undefined)}
+      >
         {/* <pre>{JSON.stringify(components, null, 2)}</pre> */}
 
         {renderComponents(components)}
@@ -56,8 +60,10 @@ export function EditArea() {
           <HoverMask
             componentId={hoverComponentId}
             containerClassName="edit-area"
+            portalWrapperClassName="portal-wrapper"
           />
         )}
+        <div className="portal-wrapper"></div>
       </div>
     </>
   );
