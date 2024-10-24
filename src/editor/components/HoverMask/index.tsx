@@ -116,7 +116,7 @@ function HoverMask({
             whiteSpace: "nowrap",
           }}
         >
-          {curComponent?.name}
+          {curComponent?.desc}
         </div>
       </div>
     </>,
