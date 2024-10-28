@@ -17,12 +17,12 @@ export function Setting() {
       <Segmented
         value={key}
         onChange={setKey}
-        options={["属性", "事件", "样式"]}
+        options={["属性", "样式", "事件"]}
       ></Segmented>
-      <div>
+      <div className="pt-[20px]">
         {key === "属性" && <ComponentAttr />}
-        {key === "事件" && <ComponentEvent />}
         {key === "样式" && <ComponentStyle />}
+        {key === "事件" && <ComponentEvent />}
       </div>
     </div>
   );
