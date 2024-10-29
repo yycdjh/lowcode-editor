@@ -5,6 +5,7 @@ import {
   useComponentConfigStore,
 } from "../../stores/component-config";
 import { CSSProperties, useEffect } from "react";
+import CssEditor from "./CssEditor";
 
 export function ComponentStyle() {
   const [form] = Form.useForm();
@@ -56,6 +57,9 @@ export function ComponentStyle() {
           </Form.Item>
         );
       })}
+      <div className="h-[200px] border-[1px] border-[#ccc]">
+        <CssEditor value={`.comp{\n\n}`} />
+      </div>
     </Form>
   );
 }
