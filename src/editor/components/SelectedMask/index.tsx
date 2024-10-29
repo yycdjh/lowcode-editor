@@ -31,7 +31,10 @@ export function SelectedMask({
   }, [componentId]);
 
   useEffect(() => {
-    updatePosition();
+    // updatePosition();
+    setTimeout(() => {
+      updatePosition();
+    }, 200);
   }, [components]);
 
   useEffect(() => {
