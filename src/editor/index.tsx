@@ -1,9 +1,10 @@
 import { Allotment } from "allotment";
 import "allotment/dist/style.css";
 import { Header } from "./components/Header";
-import { Material } from "./components/Material/index";
+// import { Material } from "./components/Material/index";
 import { EditArea } from "./components/EditArea/index";
 import { Setting } from "./components/Setting/index";
+import { MaterialWrapper } from "./components/MaterialWrapper";
 
 export default function ReactPlayground() {
   return (
@@ -13,7 +14,8 @@ export default function ReactPlayground() {
       </div>
       <Allotment>
         <Allotment.Pane preferredSize={240} maxSize={300} minSize={200}>
-          <Material />
+          <MaterialWrapper />
+          {/* <Material /> */}
         </Allotment.Pane>
         <Allotment.Pane>
           <EditArea />
