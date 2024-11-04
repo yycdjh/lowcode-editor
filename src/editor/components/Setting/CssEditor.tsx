@@ -17,7 +17,7 @@ export default function CssEditor(props: Props) {
 
   const handleEditorMount: OnMount = (editor, monaco) => {
     editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyJ, () => {
-      editor.getAction("editor.action.formatDocument")?.run();
+      editor.getAction("editor.actions.formatDocument")?.run();
     });
   };
 
