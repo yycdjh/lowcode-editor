@@ -5,8 +5,8 @@ import ButtonDev from "../materials/Button/dev";
 import ButtonProd from "../materials/Button/prod";
 import PageDev from "../materials/Page/dev";
 import PageProd from "../materials/Page/prod";
-import ModalDev from "../materials/Modal/dev";
 import ModalProd from "../materials/Modal/prod";
+import ModalDev from "../materials/Modal/dev";
 
 export interface ComponentSetter {
   name: string;
@@ -20,6 +20,11 @@ export interface ComponentEvent {
   label: string;
 }
 
+export interface ComponentMethod {
+  name: string;
+  label: string;
+}
+
 export interface ComponentConfig {
   name: string;
   defaultProps: Record<string, any>;
@@ -27,15 +32,13 @@ export interface ComponentConfig {
   setter?: ComponentSetter[];
   stylesSetter?: ComponentSetter[];
   events?: ComponentEvent[];
-  // component: any;
+  methods?: ComponentMethod[];
   dev: any;
   prod: any;
 }
 
 interface State {
-  componentConfig: {
-    [key: string]: ComponentConfig;
-  };
+  componentConfig: { [key: string]: ComponentConfig };
 }
 
 interface Action {
@@ -60,7 +63,7 @@ export const useComponentConfigStore = create<State & Action>((set) => ({
       setter: [
         {
           name: "type",
-          label: "类型",
+          label: "按钮类型",
           type: "select",
           options: [
             { label: "主按钮", value: "primary" },
@@ -102,7 +105,7 @@ export const useComponentConfigStore = create<State & Action>((set) => ({
     Modal: {
       name: "Modal",
       defaultProps: {
-        title: "标题",
+        title: "弹窗",
       },
       setter: [
         {
@@ -115,17 +118,28 @@ export const useComponentConfigStore = create<State & Action>((set) => ({
       events: [
         {
           name: "onOk",
-          label: "确定事件",
+          label: "确认事件",
         },
         {
           name: "onCancel",
           label: "取消事件",
         },
       ],
+      methods: [
+        {
+          name: "open",
+          label: "打开弹窗",
+        },
+        {
+          name: "close",
+          label: "关闭弹窗",
+        },
+      ],
       desc: "弹窗",
       dev: ModalDev,
       prod: ModalProd,
     },
+
     Page: {
       name: "Page",
       defaultProps: {},
@@ -134,7 +148,6 @@ export const useComponentConfigStore = create<State & Action>((set) => ({
       prod: PageProd,
     },
   },
-
   registerComponent: (name, componentConfig) =>
     set((state) => {
       return {

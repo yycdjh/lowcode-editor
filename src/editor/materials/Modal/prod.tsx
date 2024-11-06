@@ -1,5 +1,5 @@
 import { Modal as AntdModal } from "antd";
-import React, { forwardRef, useImperativeHandle, useState } from "react";
+import { forwardRef, useImperativeHandle, useState } from "react";
 import { CommonComponentProps } from "../../interface";
 
 export interface ModalRef {
@@ -11,7 +11,7 @@ const Modal: React.ForwardRefRenderFunction<ModalRef, CommonComponentProps> = (
   { children, title, onOk, onCancel, styles },
   ref
 ) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   useImperativeHandle(
     ref,
@@ -39,10 +39,11 @@ const Modal: React.ForwardRefRenderFunction<ModalRef, CommonComponentProps> = (
       }}
       onOk={() => {
         onOk && onOk();
-        setOpen(false);
       }}
       destroyOnClose
-    ></AntdModal>
+    >
+      {children}
+    </AntdModal>
   );
 };
 

@@ -1,9 +1,9 @@
 import { CommonComponentProps } from "../../interface";
 
-import { useMaterailDrop } from "../../hooks/useMaterialDrop";
+import { useMaterialDrop } from "../../hooks/useMaterialDrop";
 
 const Container = ({ id, children, styles }: CommonComponentProps) => {
-  const { canDrop, drop } = useMaterailDrop(["Button", "Container"], id);
+  const { canDrop, drop } = useMaterialDrop(["Button", "Container"], id);
   return (
     <div
       data-component-id={id}
